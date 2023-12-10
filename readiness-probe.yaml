@@ -1,0 +1,24 @@
+# readiness-probe.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+  namespace: exam
+spec:
+  containers:
+    - name: backend
+      image: vinesen1/springa3:latest
+      resources:
+        limits:
+          cpu: "500m"
+          memory: "512Mi"
+        requests:
+          cpu: "100m"
+          memory: "256Mi"
+      readinessProbe:
+        httpGet:
+          path: /actuator/health/readiness
+          port: 8080
+        initialDelaySeconds: 5
+        periodSeconds: 15

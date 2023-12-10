@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  mysql-container:
+    image: mysql
+    container_name: mysqlcon
+
+    networks:
+      - réseaudoc
+    environment:
+      MYSQL_ROOT_PASSWORD: OUSSAMA
+      MYSQL_DATABASE: testdb
+    volumes:
+      - mysql-data:/var/lib/mysql
+  backend:
+    image: springo
+    container_name: springocon
+    ports:
+      - 8080:8080
+    networks:
+      - réseaudoc
+    depends_on:
+      - mysql-container
+  frontend:
+    image: anguimage
+    container_name: angularcon
+    ports:
+      - 4200:80
+    networks:
+      - réseaudoc
+    depends_on:
+      - backend
+volumes:
+  mysql-data:
+    driver: local
+networks:
+  networkapp:
+    driver: bridge
