@@ -1,15 +1,15 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-ingress2
-  namespace: exam
+  name: ingress
+  namespace: helm
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/add-base-url: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: projetdocker.com
+    - host: backend.com
       http:
         paths:
           - path: /
@@ -18,4 +18,4 @@ spec:
               service:
                 name: backend-service
                 port:
-                  number: 80
+                  number: 8080
